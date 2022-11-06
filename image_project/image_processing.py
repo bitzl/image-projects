@@ -1,6 +1,6 @@
 
 from pathlib import Path
-import tqdm
+from tqdm import tqdm
 import skimage
 import glymur
 
@@ -10,9 +10,9 @@ def generate_jp2(src: Path, dest: Path):
     dest/name/number.jp2
     """
     dest.mkdir(exist_ok=True, parents=True)
-    objects = dict()
-    total = sum(1 for _ in src.iterdir())
-    for path in tqdm(src.iterdir(), total=total):
+
+    input_images = sorted(list(src.glob("**/*.png")))
+    for path in tqdm(input_images):
         if not path.suffix == ".png":
             continue
 

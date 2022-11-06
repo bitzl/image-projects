@@ -17,7 +17,7 @@ def main(image_sources: Path, target_path: Path, base_url: str  = typer.Option("
     typer.echo(f"Generate images and manifests to: {image_targets}")
     typer.echo(f"Temporary files: {temp_path}")
     reset_directory(temp_path)
-    generate_jp2(image_sources, www_path)
+    generate_jp2(image_sources, temp_path)
     generate_manifests(image_targets, base_url)
     generate_html(image_targets, temp_path)
     generate_css_and_js(temp_path)
@@ -25,7 +25,7 @@ def main(image_sources: Path, target_path: Path, base_url: str  = typer.Option("
 
 def reset_directory(path: Path):
     if path.exists():
-        path.rmtree()
+        path.rmdir()
     path.mkdir()
 
 if __name__ == "__main__":
