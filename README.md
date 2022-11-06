@@ -1,0 +1,1 @@
+Scripts to generate static HTML, deploy images as JPEG2000 and generate IIIF manifests. This code *is not officially maintained and can change anytime* as it is currently meant to work for certain personal projects only. Future generalizations are possible, but are not planned at the moment.

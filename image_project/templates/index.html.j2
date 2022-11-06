@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/node_modules/@fontsource/ibm-plex-mono/400.css">
+  <link rel="stylesheet" href="/output.css">
+  <style>
+    * {
+      font-family: 'IBM Plex Mono', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="justify-center">
+  {% for group in groups %}
+  <div class="flex flex-wrap  bg-neutral-900">
+    {# {% for item in items %}
+    <a href="/{{ item }}""><img src=" /iiif/2/{{ item }}-03.jp2/full/512,/0/default.jpg" alt="{{ item }}"></a>
+    {% endfor %} #}
+    {% for item in group %}
+      {# <a href="/{{ item }}""> #}
+      {# <img src="/iiif/2/{{ item }}-03.jp2/full/512,/0/default.jpg" alt="{{ item }}"> #}
+      {# </a> #}
+    <figure class="relative max-w-sm transition-all duration-300 cursor-pointer ml-1 mt-1">
+      <a href="/{{ item }}">
+        <img class="" src="/iiif/2/{{ item }}-03.jp2/full/512,/0/default.jpg" alt="{{ item }}">
+      </a>
+      <figcaption class="absolute text-center w-full bottom-0 px-4 text-lg text-white backdrop-blur-xl backdrop-brightness-50">
+        <p>{{ item }}</p>
+      </figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</body>
+</html>
