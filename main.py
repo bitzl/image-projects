@@ -8,7 +8,7 @@ from image_project.manifests import generate_manifests
 app = typer.Typer()
 
 @app.command()
-def main(image_sources: Path, target_path: Path):
+def main(image_sources: Path, target_path: Path, base_url: str  = typer.Option("http://lab.bitzl.io")):
     www_path = target_path / "www"
     image_targets = target_path / "images"
     temp_path = Path("temp/")
@@ -18,7 +18,7 @@ def main(image_sources: Path, target_path: Path):
     typer.echo(f"Temporary files: {temp_path}")
     reset_directory(temp_path)
     generate_jp2(image_sources, www_path)
-    generate_manifests(image_targets)
+    generate_manifests(image_targets, base_url)
     generate_html(image_targets, temp_path)
     generate_css_and_js(temp_path)
     publish(www_path, temp_path)
