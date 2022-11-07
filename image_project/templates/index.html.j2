@@ -15,7 +15,8 @@
 
 <body class="justify-center">
   {% for group in groups %}
-  <div class="flex flex-wrap  bg-neutral-900">
+  <div class="flex bg-neutral-900 justify-center">
+  <div class="grid gap-1 2xl:grid-cols-6 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 bg-neutral-900">
     {# {% for item in items %}
     <a href="/{{ item }}""><img src=" /iiif/2/{{ item }}-03.jp2/full/512,/0/default.jpg" alt="{{ item }}"></a>
     {% endfor %} #}
@@ -23,7 +24,7 @@
       {# <a href="/{{ item }}""> #}
       {# <img src="/iiif/2/{{ item }}-03.jp2/full/512,/0/default.jpg" alt="{{ item }}"> #}
       {# </a> #}
-    <figure class="relative max-w-sm transition-all duration-300 cursor-pointer ml-1 mt-1">
+    <figure class="relative max-w-sm cursor-pointer ml-1 mt-1">
       <a href="/{{ item }}">
         <img class="" src="/iiif/2/{{ item }}-03.jp2/full/512,/0/default.jpg" alt="{{ item }}">
       </a>
@@ -32,6 +33,7 @@
       </figcaption>
     </figure>
     {% endfor %}
+  </div>
   </div>
   {% endfor %}
 </body>
