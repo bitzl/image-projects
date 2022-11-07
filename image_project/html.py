@@ -4,12 +4,13 @@ import subprocess
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 def generate_html(items_path: Path, target_path: Path):
+    target_path.mkdir(exist_ok=True)
     env = Environment(
-        loader=PackageLoader("generator"),
+        loader=PackageLoader("image_project"),
         autoescape=select_autoescape()
     )
 
-    template = env.get_template("overview.html.j2")
+    template = env.get_template("index.html.j2")
     item_ids = [p.name for p in sorted(items_path.iterdir()) if p.is_dir()]
 
     # For now create groups by a common prefix, which means the items have been create roughly at the same time.
@@ -33,15 +34,13 @@ def generate_html(items_path: Path, target_path: Path):
 
 
 def generate_css_and_js(target_path: Path):
-    asset_path = Path("assets/")
-    asset_path.mkdir(exists_ok=True)
-    source_css = asset_path / "source.css"
-    shutil.copy("source.css", source_css)
-    subprocess.run(["npx", "tailwindcss", "-i", target_path / "source.css", "-o", asset_path / "style.css"])
-    source_css.unlink() # Don't need source.css anymore, we now have style.css from Tailwind
-    shutil.copy("node_modules/ @fontsource/400.css", asset_path / "400.css")
-    shutil.copy("node_modules/tify/dist/tify.js", asset_path / "tify.js")
-    shutil.copy("node_modules/tify/dist/tify.css", asset_path / "tify.css")
+    asset_path = target_path / "assets"
+    print(asset_path)
+    asset_path.mkdir(exist_ok=True)
+    subprocess.run(["npx", "tailwindcss", "-i", "source.css", "-o", asset_path / "style.css"])
+    shutil.copytree("node_modules/@fontsource/ibm-plex-mono", asset_path / "ibm-plex-mono", dirs_exist_ok=True)
+    shutil.copy("node_modules/tify/dist/tify.js", asset_path)
+    shutil.copy("node_modules/tify/dist/tify.css", asset_path)
 
 
 def publish(temp_path: Path, target_path: Path):
