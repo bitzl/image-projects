@@ -71,7 +71,8 @@ def generate_manifests(item_path: Path, base_url: str):
         if not item.is_dir():
             continue
     
-        image_infos = [ImageInfo.from_path(path) for path in item.iterdir() if path.suffix == ".jp2"]
+        image_paths = sorted(path for path in item.iterdir() if path.suffix == '.jp2')
+        image_infos = [ImageInfo.from_path(path) for path in image_paths]
         doc = manifest(item.name, image_infos, base_url)
         with open(item / "manifest.json", "w") as f:
             json.dump(doc, f)
